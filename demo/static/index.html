@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Go屏幕流测试</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        #video { max-width: 90%; border: 1px solid #ccc; margin: 20px auto; }
+    </style>
+</head>
+<body>
+<h1>Go屏幕流测试播放器</h1>
+<img id="video" src="/stream" alt="视频流">
+
+<div>
+    <button onclick="window.location.reload()">重新加载</button>
+</div>
+
+<script>
+    // 自动重连逻辑
+    const video = document.getElementById('video');
+    video.onerror = function() {
+        setTimeout(function() {
+            video.src = '/stream?t=' + new Date().getTime();
+        }, 1000);
+    };
+</script>
+</body>
+</html>
